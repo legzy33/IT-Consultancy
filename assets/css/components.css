@@ -1,0 +1,120 @@
+/* Buttons */
+.cta-button {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: white;
+    color: var(--primary-color);
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
+    background: var(--primary-color);
+    color: white;
+    border-color: white;
+}
+
+.cta-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
+}
+
+/* Service Cards */
+.service-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(37, 99, 235, 0.2);
+    background-color: #f8faff;
+    border-color: var(--primary-color);
+}
+
+.service-card i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+/* Form Elements */
+#contact-form input,
+#contact-form textarea {
+    padding: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+#contact-form input:hover,
+#contact-form textarea:hover {
+    border-color: var(--primary-color);
+}
+
+#contact-form input:focus,
+#contact-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Loading Spinner */
+.loading-spinner {
+    display: none;
+    width: 30px;
+    height: 30px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid var(--primary-color);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -15px;
+    margin-left: -15px;
+}
+
+/* Form Success State */
+.form-success {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    align-items: center;
+    justify-content: center;
+}
+
+.form-success i {
+    color: #22c55e;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+#contact-form.loading .loading-spinner {
+    display: block;
+}
+
+#contact-form.success .form-success {
+    display: flex;
+    flex-direction: column;
+}

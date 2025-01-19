@@ -244,8 +244,17 @@ body {
 }
 
 .service-card:hover i {
-    transform: scale(1.1) rotate(5deg);
-    animation: none;
+    transform: scale(1.1);
+    animation: spinHover 0.6s ease;
+}
+
+@keyframes spinHover {
+    0% {
+        transform: scale(1.1) rotate(0deg);
+    }
+    100% {
+        transform: scale(1.1) rotate(360deg);
+    }
 }
 
 /* About Section */

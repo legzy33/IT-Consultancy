@@ -1,0 +1,117 @@
+/* Tablet and Mobile Styles */
+@media (max-width: 768px) {
+    /* Typography */
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    /* Layout */
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .achievements {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    /* Navigation */
+    .nav-links {
+        display: none;
+    }
+
+    /* Services */
+    .services-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+
+    /* Team */
+    .team-grid {
+        grid-template-columns: 1fr;
+        padding: 0 2rem;
+    }
+
+    /* Sections */
+    .parallax-section {
+        padding: 120px 0 80px;
+    }
+
+    /* Contact */
+    .contact-info {
+        margin-top: 2rem;
+    }
+
+    .info-item:hover {
+        transform: none;
+    }
+}
+
+/* Small Mobile Styles */
+@media (max-width: 480px) {
+    /* Typography */
+    .hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    /* Sections */
+    .services h2, 
+    .about h2, 
+    .team h2, 
+    .contact h2 {
+        font-size: 2rem;
+    }
+
+    /* Spacing */
+    .container {
+        padding: 0 15px;
+    }
+
+    /* Forms */
+    #contact-form input,
+    #contact-form textarea {
+        padding: 0.75rem;
+    }
+
+    /* Buttons */
+    .cta-button {
+        padding: 0.75rem 1.5rem;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .parallax-section {
+        height: auto !important;
+        color: black;
+    }
+
+    .parallax-bg {
+        display: none;
+    }
+
+    .navbar,
+    .scroll-progress,
+    .cta-button,
+    #contact-form {
+        display: none;
+    }
+
+    body {
+        color: black;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+}

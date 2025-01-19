@@ -1,0 +1,128 @@
+/* Button Ripple Effect */
+.cta-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1);
+    transform-origin: 50% 50%;
+}
+
+.cta-button.ripple::after {
+    animation: ripple 0.6s ease-out;
+}
+
+/* Navigation Hover Effects */
+.nav-links a:hover {
+    color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Service Card Hover Effects */
+.service-card:hover i {
+    transform: scale(1.1);
+    animation: spinHover 0.6s ease;
+}
+
+/* Team Member Hover Effects */
+.team-member:hover {
+    transform: translateY(-10px);
+}
+
+.member-image:hover {
+    transform: scale(1.05);
+    border-color: white;
+    box-shadow: 0 8px 16px rgba(37, 99, 235, 0.4);
+}
+
+/* Contact Info Hover Effects */
+.info-item:hover {
+    transform: translateX(10px);
+    background-color: rgba(37, 99, 235, 0.1);
+}
+
+.info-item:hover i {
+    transform: scale(1.2);
+    color: var(--secondary-color);
+}
+
+/* Keyframe Animations */
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+@keyframes spinHover {
+    0% {
+        transform: scale(1.1) rotate(0deg);
+    }
+    100% {
+        transform: scale(1.1) rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hero Animations */
+.hero h1 {
+    animation: fadeInUp 1s ease;
+}
+
+.hero p {
+    animation: fadeInUp 1s ease 0.2s;
+}
+
+.hero .cta-button {
+    animation: fadeInUp 1s ease 0.4s;
+}
+
+/* Loading Spinner Animation */
+.loading-spinner {
+    animation: spin 1s linear infinite;
+}
+
+/* Form Success Animation */
+.form-success {
+    animation: fadeInUp 0.5s ease;
+}
