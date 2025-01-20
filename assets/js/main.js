@@ -117,20 +117,29 @@ const initSmoothScroll = () => {
 const initContactForm = () => {
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
+        const loadingSpinner = contactForm.querySelector('.loading-spinner');
+        const formSuccess = contactForm.querySelector('.form-success');
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+
         contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            this.classList.add('loading');
+            // Disable submit button and show loading spinner
+            submitButton.disabled = true;
+            loadingSpinner.classList.add('show');
             
             // Simulate form submission delay
             await new Promise(resolve => setTimeout(resolve, 1500));
             
-            this.classList.remove('loading');
-            this.classList.add('success');
+            // Hide loading spinner and show success message
+            loadingSpinner.classList.remove('show');
+            formSuccess.classList.add('show');
             
+            // Reset form and hide success message after delay
             setTimeout(() => {
                 this.reset();
-                this.classList.remove('success');
+                formSuccess.classList.remove('show');
+                submitButton.disabled = false;
             }, 3000);
         });
     }

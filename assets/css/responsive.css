@@ -1,23 +1,109 @@
-/* Tablet and Mobile Styles */
+/* Service Cards Responsive Styles */
+@media (max-width: 768px) {
+    .services {
+        padding: 80px 0;
+    }
+
+    .services-grid {
+        gap: 2rem;
+        padding: 30px 20px;
+    }
+
+    .service-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .service-card i {
+        font-size: 2.25rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .service-card h3 {
+        font-size: 1.35rem;
+    }
+
+    .service-card p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .services {
+        padding: 60px 0;
+    }
+
+    .services-grid {
+        gap: 1.5rem;
+        padding: 20px 15px;
+    }
+
+    .service-card {
+        padding: 1.75rem 1.25rem;
+    }
+
+    .service-card i {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .service-card h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+    }
+}
+
+/* Tablet Styles */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 24px;
+    }
+
+    section h2 {
+        font-size: 2.25rem;
+        margin-bottom: 50px;
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+}
+
+/* Mobile Styles */
 @media (max-width: 768px) {
     /* Typography */
     .hero h1 {
         font-size: 2rem;
+        line-height: 1.3;
+    }
+    
+    section h2 {
+        font-size: 2rem;
+        margin-bottom: 40px;
     }
     
     /* Layout */
+    .container {
+        padding: 0 20px;
+    }
+
     .contact-content {
         grid-template-columns: 1fr;
+        gap: 3rem;
+        padding: 30px 20px;
     }
     
     .about-content {
         flex-direction: column;
         text-align: center;
+        gap: 3rem;
+        padding: 30px 20px;
     }
     
     .achievements {
         flex-direction: column;
         gap: 2rem;
+        margin-top: 2rem;
     }
     
     /* Navigation */
@@ -25,26 +111,40 @@
         display: none;
     }
 
-    /* Services */
-    .services-grid {
-        grid-template-columns: 1fr;
-        padding: 0 1rem;
-    }
-
-    /* Team */
-    .team-grid {
-        grid-template-columns: 1fr;
-        padding: 0 2rem;
-    }
-
     /* Sections */
     .parallax-section {
         padding: 120px 0 80px;
     }
 
+    .services {
+        padding: 80px 0;
+    }
+    
+    /* Services */
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 30px 20px;
+    }
+
+    /* Team */
+    .team-grid {
+        padding: 30px 20px;
+    }
+
     /* Contact */
+    .contact {
+        padding: 80px 0;
+    }
+
     .contact-info {
         margin-top: 2rem;
+        gap: 2rem;
+    }
+
+    .info-item {
+        padding: 1.25rem;
+        gap: 1.25rem;
     }
 
     .info-item:hover {
@@ -63,28 +163,59 @@
         font-size: 1rem;
     }
 
-    /* Sections */
-    .services h2, 
-    .about h2, 
-    .team h2, 
-    .contact h2 {
-        font-size: 2rem;
+    section h2 {
+        font-size: 1.75rem;
+        margin-bottom: 30px;
+    }
+
+    /* Layout */
+    .container {
+        padding: 0 16px;
+    }
+
+    .parallax-section {
+        padding: 100px 0 60px;
+    }
+
+    .services,
+    .contact {
+        padding: 60px 0;
     }
 
     /* Spacing */
-    .container {
-        padding: 0 15px;
+    .services-grid,
+    .team-grid,
+    .contact-content {
+        padding: 20px 16px;
+        gap: 1.5rem;
+    }
+
+    .about-content {
+        padding: 20px 16px;
+        gap: 2rem;
     }
 
     /* Forms */
+    #contact-form {
+        gap: 1rem;
+    }
+
     #contact-form input,
     #contact-form textarea {
-        padding: 0.75rem;
+        padding: 0.875rem;
+        font-size: 0.9375rem;
+    }
+
+    /* Contact Info */
+    .info-item {
+        padding: 1rem;
+        gap: 1rem;
     }
 
     /* Buttons */
     .cta-button {
-        padding: 0.75rem 1.5rem;
+        padding: 0.875rem 1.75rem;
+        font-size: 0.9375rem;
     }
 }
 
@@ -93,6 +224,7 @@
     .parallax-section {
         height: auto !important;
         color: black;
+        padding: 40px 0;
     }
 
     .parallax-bg {
@@ -106,12 +238,22 @@
         display: none;
     }
 
+    .container {
+        max-width: 100%;
+        padding: 0 20px;
+    }
+
     body {
         color: black;
+        line-height: 1.5;
     }
 
     a {
         text-decoration: none;
         color: black;
+    }
+
+    section {
+        page-break-inside: avoid;
     }
 }
