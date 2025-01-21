@@ -17,34 +17,154 @@
     animation: ripple 0.6s ease-out;
 }
 
+/* Navigation Animations */
+@keyframes menuReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes linkReveal {
+    0% {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
 /* Navigation Hover Effects */
+.nav-links {
+    animation: menuReveal 0.6s ease forwards;
+}
+
+.nav-links li {
+    opacity: 0;
+    animation: linkReveal 0.5s ease forwards;
+}
+
+.nav-links li:nth-child(1) { animation-delay: 0.1s; }
+.nav-links li:nth-child(2) { animation-delay: 0.2s; }
+.nav-links li:nth-child(3) { animation-delay: 0.3s; }
+.nav-links li:nth-child(4) { animation-delay: 0.4s; }
+.nav-links li:nth-child(5) { animation-delay: 0.5s; }
+
+.nav-links a {
+    position: relative;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
 .nav-links a:hover {
     color: var(--primary-color);
     transform: translateY(-2px);
 }
 
-.nav-links a::after {
+.nav-links a::before {
     content: '';
     position: absolute;
-    width: 0;
+    width: 100%;
     height: 2px;
-    bottom: 0;
+    bottom: -4px;
     left: 0;
     background-color: var(--primary-color);
-    transition: width 0.3s ease;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
 }
 
-.nav-links a:hover::after {
-    width: 100%;
+.nav-links a:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
 }
 
-/* Service Card Hover Effects */
+/* Scroll-triggered navbar animation */
+.navbar {
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+}
+
+.navbar.scrolled {
+    background-color: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 0;
+}
+
+/* Service Card Animations */
+.service-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform;
+}
+
+.service-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger delays for service cards */
+.service-card:nth-child(1).visible { transition-delay: 0ms; }
+.service-card:nth-child(2).visible { transition-delay: 200ms; }
+.service-card:nth-child(3).visible { transition-delay: 400ms; }
+.service-card:nth-child(4).visible { transition-delay: 600ms; }
+.service-card:nth-child(5).visible { transition-delay: 800ms; }
+
 .service-card:hover i {
     transform: scale(1.1);
     animation: spinHover 0.6s ease;
 }
 
-/* Team Member Hover Effects */
+/* Section Heading Animations */
+.section-heading {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    will-change: opacity, transform;
+}
+
+.section-heading.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Achievement Number Animations */
+.achievements li span {
+    opacity: 0;
+    transform: translateY(10px);
+    display: inline-block;
+}
+
+.achievements li span.counting {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+/* Team Member Animations */
+.team-member {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    will-change: opacity, transform;
+}
+
+.team-member.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger delays for team members */
+.team-member:nth-child(1).visible { transition-delay: 0ms; }
+.team-member:nth-child(2).visible { transition-delay: 200ms; }
+.team-member:nth-child(3).visible { transition-delay: 400ms; }
+.team-member:nth-child(4).visible { transition-delay: 600ms; }
+
 .team-member:hover {
     transform: translateY(-10px);
 }
@@ -64,6 +184,30 @@
 .info-item:hover i {
     transform: scale(1.2);
     color: var(--secondary-color);
+}
+
+/* Logo Animations */
+@keyframes logoFloat {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes logoGlow {
+    0% { text-shadow: 0 0 5px rgba(37, 99, 235, 0.2); }
+    50% { text-shadow: 0 0 15px rgba(37, 99, 235, 0.4); }
+    100% { text-shadow: 0 0 5px rgba(37, 99, 235, 0.2); }
+}
+
+@keyframes logoReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Keyframe Animations */
@@ -139,4 +283,24 @@
 /* Form Success Animation */
 .form-success {
     animation: fadeIn 0.5s ease;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .service-card,
+    .achievements li span,
+    .team-member {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
 }

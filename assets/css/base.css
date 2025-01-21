@@ -5,6 +5,12 @@
     --light-text: #4B5563;
     --background: #ffffff;
     --section-bg: #f3f4f6;
+    
+    /* New gradient variables */
+    --gradient-primary: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+    --gradient-light: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(30, 64, 175, 0.05) 100%);
+    --gradient-accent: linear-gradient(45deg, rgba(37, 99, 235, 0.05) 0%, rgba(30, 64, 175, 0.1) 100%);
+    --gradient-mesh: repeating-linear-gradient(45deg, rgba(37, 99, 235, 0.03) 0px, transparent 1px, transparent 20px);
 }
 
 * {
@@ -19,12 +25,18 @@ html {
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
     line-height: 1.6;
     color: var(--text-color);
+    background: var(--background);
+    background-image: var(--gradient-mesh);
+    background-attachment: fixed;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    position: relative;
+    z-index: 1;
 }
