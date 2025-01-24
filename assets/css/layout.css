@@ -314,6 +314,9 @@ footer {
     height: 3px;
     background: var(--primary-color);
     z-index: 1001;
+    transition: width 50ms ease-out;
+    transform-origin: left;
+    will-change: width;
 }
 
 /* Section Headers */
