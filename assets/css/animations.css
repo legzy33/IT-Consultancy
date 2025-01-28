@@ -17,6 +17,56 @@
     animation: ripple 0.6s ease-out;
 }
 
+/* Enhanced Service Card Animations */
+.service-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    will-change: opacity, transform, perspective;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    background: var(--background);
+    position: relative;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    border-radius: 14px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.service-card:hover::before {
+    opacity: 1;
+    animation: gradientFlow 3s linear infinite;
+}
+
+.service-card.visible {
+    opacity: 1;
+    transform: translateY(0) rotateX(0) rotateY(0);
+}
+
+/* Service Card Icon Animation */
+.service-card i {
+    display: inline-block;
+    transition: transform 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}
+
+.service-card:hover i {
+    animation: iconBounce 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}
+
+/* Stagger delays for service cards */
+.service-card:nth-child(1).visible { transition-delay: 0ms; }
+.service-card:nth-child(2).visible { transition-delay: 200ms; }
+.service-card:nth-child(3).visible { transition-delay: 400ms; }
+.service-card:nth-child(4).visible { transition-delay: 600ms; }
+.service-card:nth-child(5).visible { transition-delay: 800ms; }
+
 /* Navigation Animations */
 @keyframes menuReveal {
     0% {
@@ -95,31 +145,6 @@
     padding: 0.5rem 0;
 }
 
-/* Service Card Animations */
-.service-card {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    will-change: opacity, transform;
-}
-
-.service-card.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Stagger delays for service cards */
-.service-card:nth-child(1).visible { transition-delay: 0ms; }
-.service-card:nth-child(2).visible { transition-delay: 200ms; }
-.service-card:nth-child(3).visible { transition-delay: 400ms; }
-.service-card:nth-child(4).visible { transition-delay: 600ms; }
-.service-card:nth-child(5).visible { transition-delay: 800ms; }
-
-.service-card:hover i {
-    transform: scale(1.1);
-    animation: spinHover 0.6s ease;
-}
-
 /* Section Heading Animations */
 .section-heading {
     opacity: 0;
@@ -186,44 +211,23 @@
     color: var(--secondary-color);
 }
 
-/* Logo Animations */
-@keyframes logoFloat {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-    100% { transform: translateY(0); }
+/* New Keyframe Animations */
+@keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-@keyframes logoGlow {
-    0% { text-shadow: 0 0 5px rgba(37, 99, 235, 0.2); }
-    50% { text-shadow: 0 0 15px rgba(37, 99, 235, 0.4); }
-    100% { text-shadow: 0 0 5px rgba(37, 99, 235, 0.2); }
+@keyframes iconBounce {
+    0%, 100% { transform: scale(1.1) translateY(0); }
+    50% { transform: scale(1.2) translateY(-10px); }
 }
 
-@keyframes logoReveal {
-    0% {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Keyframe Animations */
+/* Existing Keyframe Animations */
 @keyframes ripple {
     to {
         transform: scale(4);
         opacity: 0;
-    }
-}
-
-@keyframes spinHover {
-    0% {
-        transform: scale(1.1) rotate(0deg);
-    }
-    100% {
-        transform: scale(1.1) rotate(360deg);
     }
 }
 
