@@ -33,7 +33,7 @@
     content: '';
     position: absolute;
     inset: -2px;
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(45deg, rgba(37, 99, 235, 0.7), rgba(30, 64, 175, 0.7));
     border-radius: 14px;
     z-index: -1;
     opacity: 0;
@@ -163,12 +163,50 @@
     opacity: 0;
     transform: translateY(10px);
     display: inline-block;
+    animation: fadeInUp 0.8s ease forwards;
 }
+
+.achievements li:nth-child(1) span { animation-delay: 0.2s; }
+.achievements li:nth-child(2) span { animation-delay: 0.4s; }
+.achievements li:nth-child(3) span { animation-delay: 0.6s; }
 
 .achievements li span.counting {
     opacity: 1;
     transform: translateY(0);
     transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+/* About Section Animations */
+.about-content {
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+.about-text {
+    position: relative;
+    animation: slideUp 1s ease-out 0.3s forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 /* Team Member Animations */
@@ -252,17 +290,88 @@
     }
 }
 
+/* Parallax Effects */
+.parallax-section {
+    position: relative;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    overflow: hidden;
+    min-height: 100vh;
+    will-change: transform;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.parallax-bg {
+    position: absolute;
+    top: -20%;
+    left: -10%;
+    width: 120%;
+    height: 140%;
+    background-size: cover;
+    background-position: center;
+    transform: translateZ(-15px) scale(2.5);
+    z-index: -1;
+    will-change: transform;
+    transition: transform 0.1s linear;
+}
+
+.parallax-section .container {
+    position: relative;
+    transform: translateZ(0);
+    z-index: 1;
+    width: 100%;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    border-radius: 8px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
 /* Hero Animations */
 .hero h1 {
     animation: fadeInUp 1s ease;
+    transform: translateZ(5px) scale(0.95);
+    will-change: transform;
 }
 
 .hero p {
     animation: fadeInUp 1s ease 0.2s;
+    transform: translateZ(3px) scale(0.97);
+    will-change: transform;
 }
 
 .hero .cta-button {
     animation: fadeInUp 1s ease 0.4s;
+    transform: translateZ(8px) scale(0.92);
+    will-change: transform;
+}
+
+/* About Section Parallax */
+.about.parallax-section .about-content {
+    transform: translateZ(4px) scale(0.96);
+    will-change: transform;
+}
+
+.about.parallax-section .achievements {
+    transform: translateZ(6px) scale(0.94);
+    will-change: transform;
+}
+
+/* Accessibility - Disable parallax for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .parallax-section,
+    .parallax-bg,
+    .parallax-section .container,
+    .hero h1,
+    .hero p,
+    .hero .cta-button,
+    .about.parallax-section .about-content,
+    .about.parallax-section .achievements {
+        transform: none !important;
+        will-change: auto;
+    }
 }
 
 /* Loading Spinner Animation */

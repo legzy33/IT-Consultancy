@@ -1,207 +1,86 @@
-# Animation Enhancement Recommendations
+# Parallax Scrolling Implementation
 
-## Scroll-Triggered Effects
+## Overview
+To implement an immersive parallax scrolling effect for the Hero and About sections, we need to create multiple depth layers that move at varying speeds during scroll. This document outlines the architectural approach and implementation details.
 
-### Parallax Sections
-- **Hero Section & About Section**
-  - Current: Basic parallax background
-  - Enhancement: Add depth layers with different scroll speeds
-  ```css
-  .parallax-bg {
-    transform: translateY(calc(var(--scroll-ratio) * -50%));
-  }
-  .container {
-    transform: translateY(calc(var(--scroll-ratio) * 25%));
-  }
-  ```
+## Architecture
 
-### Progressive Content Reveal
-- **Services Grid**
-  - Current: Basic fade-up animation
-  - Enhancement: Add perspective tilt effect while scrolling
-  ```css
-  .service-card.visible {
-    transform: translateY(0) rotateX(calc(var(--scroll-ratio) * 20deg));
-  }
-  ```
+### CSS Structure
+1. Parallax Container
+   - Set up perspective and preserve-3d properties
+   - Handle overflow and positioning context
+   ```css
+   .parallax-section {
+     perspective: 1000px;
+     transform-style: preserve-3d;
+     overflow: hidden;
+     position: relative;
+   }
+   ```
 
-## Hover State Transitions
+2. Parallax Layers
+   - Background Layer (slowest)
+   - Middle Layer (medium speed)
+   - Front Layer (fastest)
+   ```css
+   .parallax-bg {
+     transform: translateZ(-10px) scale(2);
+   }
+   .parallax-middle {
+     transform: translateZ(-5px) scale(1.5);
+   }
+   .parallax-front {
+     transform: translateZ(0) scale(1);
+   }
+   ```
 
-### Service Cards
-- Current: Basic gradient border animation
-- Enhancement: Add 3D tilt effect on hover
-```css
-.service-card {
-  transition: transform 0.3s ease;
-  transform-style: preserve-3d;
-}
-.service-card:hover {
-  transform: perspective(1000px) rotateX(5deg) rotateY(5deg);
-}
-```
+### JavaScript Implementation
+1. Performance Optimizations
+   - Use requestAnimationFrame for smooth animations
+   - Implement throttling for scroll events
+   - Use transform3d for GPU acceleration
+   ```javascript
+   const parallaxElements = document.querySelectorAll('.parallax-section');
+   requestAnimationFrame(() => updateParallax(parallaxElements));
+   ```
 
-### Team Member Cards
-- Current: Basic scale animation
-- Enhancement: Add smooth photo zoom and info slide-up
-```css
-.avatar-circle img {
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.team-member:hover .avatar-circle img {
-  transform: scale(1.1);
-}
-.team-member:hover .role {
-  transform: translateY(-5px);
-}
-```
+2. Layer Movement Calculation
+   - Calculate movement based on scroll position
+   - Apply different movement speeds per layer
+   - Handle device capabilities and preferences
 
-## Loading/Entrance Animations
+### Accessibility Considerations
+1. Respect reduced motion preferences
+   ```css
+   @media (prefers-reduced-motion: reduce) {
+     .parallax-section * {
+       transform: none !important;
+       transition: none !important;
+     }
+   }
+   ```
 
-### Initial Page Load
-- Current: Basic fade-in animations
-- Enhancement: Add staggered reveal sequence
-```css
-.hero h1 {
-  animation: slideInLeft 1s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.hero p {
-  animation: slideInRight 1s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
-}
-```
+2. Performance fallbacks for mobile devices
+   - Detect device capabilities
+   - Provide simplified animations for lower-end devices
 
-### Form Submission
-- Current: Basic loading spinner
-- Enhancement: Add success state morphing animation
-```css
-.form-success {
-  animation: morphSuccess 0.6s cubic-bezier(0.65, 0, 0.35, 1);
-}
-```
+## Implementation Steps
+1. Add CSS classes for parallax containers and layers
+2. Implement JavaScript scroll handling with performance optimizations
+3. Add accessibility features and fallbacks
+4. Test across different devices and browsers
 
-## Micro-interactions
+## Technical Recommendations
+1. Use transform3d for hardware acceleration
+2. Implement throttling for scroll events
+3. Add will-change hints for optimization
+4. Provide fallbacks for older browsers
+5. Ensure smooth degradation on mobile devices
 
-### Navigation Links
-- Current: Basic underline animation
-- Enhancement: Add magnetic hover effect
-```javascript
-// Add to main.js
-const navLinks = document.querySelectorAll('.nav-links a');
-navLinks.forEach(link => {
-  link.addEventListener('mousemove', (e) => {
-    const rect = link.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    link.style.transform = `translate(${x/10}px, ${y/10}px)`;
-  });
-  link.addEventListener('mouseleave', () => {
-    link.style.transform = '';
-  });
-});
-```
+## Impact Analysis
+- Performance: Minimal impact with proper optimization
+- Accessibility: Fully compliant with user preferences
+- Browser Support: Wide compatibility with fallbacks
+- Mobile: Optimized experience with reduced effects
 
-### Achievement Numbers
-- Current: Basic counting animation
-- Enhancement: Add number scramble effect
-```javascript
-// Add to main.js
-function scrambleNumber(element, finalNumber) {
-  let duration = 2000;
-  let steps = 30;
-  let step = 0;
-  
-  const interval = setInterval(() => {
-    if (step < steps) {
-      element.textContent = Math.floor(Math.random() * finalNumber);
-      step++;
-    } else {
-      element.textContent = finalNumber;
-      clearInterval(interval);
-    }
-  }, duration/steps);
-}
-```
-
-## Background Effects
-
-### Hero Section
-- Current: Static parallax background
-- Enhancement: Add subtle gradient movement
-```css
-.parallax-bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(45deg, rgba(0,0,0,0.5), transparent);
-  animation: gradientShift 8s ease-in-out infinite;
-}
-```
-
-### Services Section
-- Current: Static background
-- Enhancement: Add subtle grid pattern animation
-```css
-.services {
-  position: relative;
-}
-.services::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: linear-gradient(#000 1px, transparent 1px),
-                    linear-gradient(90deg, #000 1px, transparent 1px);
-  background-size: 50px 50px;
-  opacity: 0.1;
-  animation: gridMove 15s linear infinite;
-}
-```
-
-## Implementation Notes
-
-1. **Performance Considerations**
-   - Use `will-change` property judiciously
-   - Implement `IntersectionObserver` for scroll animations
-   - Use `transform` and `opacity` for animations
-   - Add `@media (prefers-reduced-motion: reduce)` fallbacks
-
-2. **Progressive Enhancement**
-   - Ensure core functionality works without JavaScript
-   - Add smooth fallbacks for older browsers
-   - Maintain accessibility standards
-
-3. **Code Organization**
-   - Keep animations.css focused on animation definitions
-   - Move complex animations to main.js
-   - Use CSS custom properties for animation values
-
-4. **Browser Support**
-   - Test in major browsers
-   - Provide fallbacks for CSS Grid and modern transforms
-   - Consider mobile performance impact
-
-## Required New Keyframes
-
-```css
-@keyframes gridMove {
-  0% { background-position: 0 0; }
-  100% { background-position: 50px 50px; }
-}
-
-@keyframes gradientShift {
-  0%, 100% { background-position: 0% 0%; }
-  50% { background-position: 100% 100%; }
-}
-
-@keyframes morphSuccess {
-  0% { clip-path: circle(0% at 50% 50%); }
-  100% { clip-path: circle(100% at 50% 50%); }
-}
-
-@keyframes slideInLeft {
-  from { transform: translateX(-100px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-}
-
-@keyframes slideInRight {
-  from { transform: translateX(100px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-}
+This implementation will create an engaging parallax effect while maintaining performance and accessibility standards.
